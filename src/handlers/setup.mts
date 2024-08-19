@@ -5,6 +5,7 @@ import { Config } from "../models/config.mjs"
 import { handler } from "../models/handler.mjs"
 import { fetchChannel } from "../utilities/discord.mjs"
 import {
+  ActivityType,
   ChannelType,
   ForumLayoutType,
   SortOrderType,
@@ -78,5 +79,11 @@ export const SetupHandler = handler({
         tag.id = forumTag.id
       }
     }
+
+    client.user.setActivity({
+      type: ActivityType.Custom,
+      state: "DM to contact staff!",
+      name: "✉️",
+    })
   },
 })
