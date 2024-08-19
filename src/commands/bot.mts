@@ -110,7 +110,7 @@ const editModal = modal({
     ),
     modalInput(
       "description",
-      true,
+      false,
       new TextInputBuilder()
         .setLabel("Description")
         .setMaxLength(400)
@@ -118,7 +118,9 @@ const editModal = modal({
     ),
   ],
   async handle(interaction, { username, description }) {
-    await interaction.client.application.edit({ description })
+    await interaction.client.application.edit({
+      description: description ?? "",
+    })
     await interaction.client.user.edit({ username })
     await interaction.reply({
       embeds: [
