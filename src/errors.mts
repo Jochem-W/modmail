@@ -9,7 +9,7 @@ import type { Client } from "discord.js"
 
 export async function logError(client: Client, error: unknown) {
   console.error(error)
-  if (!client.isReady() || !(error instanceof Error)) {
+  if (!client.isReady() || !(error instanceof Error) || !Config.logs) {
     return
   }
 

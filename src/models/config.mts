@@ -8,7 +8,7 @@ const model = z.object({
   applicationId: z.string(),
   guild: z.string(),
   forum: z.string(),
-  logs: z.string(),
+  logs: z.string().optional(),
   prefixes: z.array(z.string()),
   commands: z.array(z.string()),
 })

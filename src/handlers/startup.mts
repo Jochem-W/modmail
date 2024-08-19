@@ -33,15 +33,17 @@ export const StartupHandler = handler({
         break
     }
 
-    const message = {
-      embeds: [new EmbedBuilder().setTitle(title)],
+    if (Config.logs) {
+      const message = {
+        embeds: [new EmbedBuilder().setTitle(title)],
+      }
+      const channel = await fetchChannel(
+        client,
+        Config.logs,
+        ChannelType.GuildText,
+      )
+      await channel.send(message)
     }
-    const channel = await fetchChannel(
-      client,
-      Config.logs,
-      ChannelType.GuildText,
-    )
-    await channel.send(message)
 
     await setState("UP")
 
