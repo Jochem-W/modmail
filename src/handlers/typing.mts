@@ -12,7 +12,10 @@ export const TypingHandler = handler({
   event: "typingStart",
   once: false,
   async handle(typing) {
-    if (!typing.channel.isDMBased()) {
+    if (
+      !typing.channel.isDMBased() ||
+      typing.channel.type === ChannelType.GroupDM
+    ) {
       return
     }
 
