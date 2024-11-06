@@ -12,9 +12,7 @@ export const threadsTable = pgTable(
     last: text("last").notNull(),
     lastClose: text("last_close"),
   },
-  (t) => ({
-    unq: unique().on(t.user, t.open),
-  }),
+  (t) => [unique().on(t.user, t.open)],
 )
 
 export const pingsTable = pgTable("ping", { id: text("id").primaryKey() })

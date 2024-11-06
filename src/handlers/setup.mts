@@ -14,13 +14,14 @@ import {
 
 type Key = "awaitingStaff" | "awaitingUser" | "closed" | "open"
 
-export const Tags: {
-  [K in Key]: {
+export const Tags: Record<
+  Key,
+  {
     id: string | null
     name: string
     emoji: { name: string; id: null }
   }
-} = {
+> = {
   awaitingStaff: {
     id: null,
     name: "Awaiting staff reply",
