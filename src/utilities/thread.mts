@@ -34,6 +34,7 @@ import {
   userMention,
 } from "discord.js"
 import { and, desc, eq } from "drizzle-orm"
+import { DateTime } from "luxon"
 import PQueue from "p-queue"
 import postgres from "postgres"
 import { Stream } from "stream"
@@ -513,7 +514,18 @@ const createThreadButton = component({
         })
         after = messages.firstKey() ?? thread.id
 
-        enqueue(...messages.reverse().values())
+        enqueue(
+          ...messages
+            .filter(
+              (message) =>
+                DateTime.fromJSDate(message.createdAt)
+                  .diffNow()
+                  .negate()
+                  .as("hours") < 1,
+            )
+            .reverse()
+            .values(),
+        )
       } while (messages.size === 100)
 
       return
